@@ -15,4 +15,20 @@ async function getRankValues() {
   return data;
 }
 
-export { getRankValues };
+async function saveTwitterHandle(handle, ranks) {
+  console.log(handle);
+  console.log(ranks);
+  let { data, error } = await supabase.from("users").insert({
+    handle: handle,
+    ranks: ranks,
+  });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return data;
+}
+
+export { getRankValues, saveTwitterHandle };
