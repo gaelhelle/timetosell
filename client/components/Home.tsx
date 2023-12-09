@@ -3,7 +3,7 @@ import { formatTimestamp } from "@/utils/utils";
 async function getData() {
   if (!process.env.NEXT_PUBLIC_API_URL) return;
 
-  const res = await fetch(process.env.NEXT_PUBLIC_API_URL);
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL, { next: { revalidate: 3600 } });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
