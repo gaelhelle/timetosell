@@ -3,30 +3,35 @@ on:
   push:
     branches:
       - main
-    workflow_dispatch:
+  workflow_dispatch
 jobs:
   installDependencies:
     name: Install Dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Show repo env secret
+        run: |
+          echo ${{ env.SUPABASE_URL }}
+      - name: Show repo env secret
+        run: |
+          echo ${{ env.SUPABASE_KEY }}
+    # steps:
+    #   - uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        uses: actions/setup-node@v2
-        env:
-          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-        with:
-          node-version: "14"
+    #   - name: Install Dependencies
+    #     uses: actions/setup-node@v2
+    #     env:
+    #       PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+    #     with:
+    #       node-version: "14"
 
-    - name: Use Supabase Key
-        run: echo $SUPABASE_KEY
-        env:
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }} 
-          
-      - name: Install Client Dependencies
-        run: npm install
-        working-directory: server
+    #   - name: Install Client Dependencies
+    #     run: npm install
+    #     working-directory: server
 
-      - name: Parse AppStore ranking
-        run: npm run start
-        working-directory: server
+    #   - name: Parse AppStore ranking
+    #     run: npm run start
+    #     working-directory: server
+    #     env:
+    #       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+    #       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
