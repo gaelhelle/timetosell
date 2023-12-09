@@ -1,0 +1,4 @@
+node_modules/
+server/_noneed/
+.DS_Store
+.env

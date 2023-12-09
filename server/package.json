@@ -1,0 +1,23 @@
+{
+  "name": "puppeteer-render",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "imgbb-uploader": "^1.5.1",
+    "node-cron": "^3.0.2",
+    "node-fetch": "^3.3.2",
+    "puppeteer": "^19.7.2"
+  }
+}
