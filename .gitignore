@@ -1,4 +1,5 @@
 node_modules/
+.next/
 server/_noneed/
 .DS_Store
-.env
+.env*
