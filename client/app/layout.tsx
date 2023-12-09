@@ -17,14 +17,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <>
-          <Script src="https://www.googletagmanager.com/gtag/js?id=G-BNTHDW9VCB" />
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-ESVVG7ZC46" />
           <Script id="google-analytics">
             {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
  
-          gtag('config', 'G-BNTHDW9VCB');
+          gtag('config', 'G-ESVVG7ZC46');
         `}
           </Script>
         </>
