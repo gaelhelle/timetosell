@@ -1,17 +1,10 @@
 name: Puppeteer parse AppStore Ranking
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch
+on: workflow_dispatch
 jobs:
   installDependencies:
     name: Install Dependencies
     runs-on: ubuntu-latest
     steps:
-      - name: Show repo env secret
-        run: |
-          echo ${{ env.SUPABASE_URL }}
       - name: Show repo env secret
         run: |
           echo ${{ env.SUPABASE_KEY }}
