@@ -1,4 +1,3 @@
-import { saveTwitterHandle } from "@/utils/supabase";
 import { useState } from "react";
 import RankHistory from "./RankHistory";
 
@@ -12,7 +11,7 @@ export default function Links() {
     10: false,
   });
 
-  const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event: any) => {
     const { id, checked } = event.target;
     setCheckedItems({
       ...checkedItems,
@@ -45,7 +44,7 @@ export default function Links() {
     await postData();
   };
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     setTwitterHandle(event.target.value);
   };
 
@@ -56,7 +55,7 @@ export default function Links() {
       <div>
         <div className="max-w-[700px] mx-auto text-center mb-16">
           <p className="text-sm">
-            Our system uses AI high-end tech “CAR” market detection, direct identifier <b>Coinbase AppStore Ranking</b>, to detect when is a good time to buy or sell your crypto bag.
+            Our system uses AI high-end tech “CAR” market detection, direct identifier <b>Coinbase AppStore Ranking</b>, to detect when is a good time to sell your crypto bag.
           </p>
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center gap-10">

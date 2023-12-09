@@ -1,6 +1,8 @@
 import { formatTimestamp } from "@/utils/utils";
 
 async function getData() {
+  if (!process.env.NEXT_PUBLIC_API_URL) return;
+
   const res = await fetch(process.env.NEXT_PUBLIC_API_URL);
 
   if (!res.ok) {
@@ -12,7 +14,7 @@ async function getData() {
 
 export default async function Home() {
   const data = await getData();
-  const latestValue = data.values.sort((a, b) => b.id - a.id)[0];
+  const latestValue = data.values.sort((a: any, b: any) => b.id - a.id)[0];
 
   return (
     <div className="">

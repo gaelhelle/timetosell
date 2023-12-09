@@ -1,13 +1,14 @@
-function getUniqueValuesPerDay(responseValues) {
+function getUniqueValuesPerDay(responseValues: any) {
   const valuesPerDay = {};
 
   // Process each value in the response
-  responseValues.forEach((value) => {
-    // Extract date part from the timestamp and convert it to "dd/mm/yyyy" format
+  responseValues.forEach((value: any) => {
     const date = new Date(value.created_at.split("T")[0]).toLocaleDateString("en-GB");
 
-    // Store the value for the corresponding day if it doesn't exist or has a higher rank
+    // @ts-ignore
     if (!valuesPerDay[date] || parseInt(value.rank) > parseInt(valuesPerDay[date].rank)) {
+      // @ts-ignore
+
       valuesPerDay[date] = value;
     }
   });
@@ -17,7 +18,7 @@ function getUniqueValuesPerDay(responseValues) {
   return uniqueValues;
 }
 
-function formatTimestamp(timestamp) {
+function formatTimestamp(timestamp: string) {
   const dateTimeUTC = new Date(timestamp);
   const utcMilliseconds = dateTimeUTC.getTime();
   const dateTimePST = new Date(utcMilliseconds - 8 * 60 * 60 * 1000);

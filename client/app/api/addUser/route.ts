@@ -1,7 +1,8 @@
 import { saveTwitterHandle } from "@/utils/supabase";
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiResponse } from "next";
+import { NextRequest } from "next/server";
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: Request | NextRequest, res: NextApiResponse) {
   const body = await req.json();
   const { handle, ranks } = body;
 
