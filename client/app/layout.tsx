@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-import Head from "next/head";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "timetosell - Home",
@@ -16,7 +15,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700" rel="stylesheet" />
       </head>
-      <body>{children}</body>
+      <body>
+        <>
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-BNTHDW9VCB" />
+          <Script id="google-analytics">
+            {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-BNTHDW9VCB');
+        `}
+          </Script>
+        </>
+        {children}
+      </body>
     </html>
   );
 }
