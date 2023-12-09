@@ -18,6 +18,11 @@ jobs:
         with:
           node-version: "14"
 
+    - name: Use Supabase Key
+        run: echo $SUPABASE_KEY
+        env:
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }} 
+          
       - name: Install Client Dependencies
         run: npm install
         working-directory: server
