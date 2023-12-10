@@ -9,7 +9,7 @@ export default function RankHistory() {
   const fetchData = async () => {
     if (!process.env.NEXT_PUBLIC_API_URL) return;
 
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL, { next: { revalidate: 3600 } });
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL, { cache: "no-store" });
 
     if (!res.ok) {
       throw new Error("Failed to fetch data");
