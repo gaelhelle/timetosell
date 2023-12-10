@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer");
 const { getRank } = require("./utils/utils");
 const { addToDB } = require("./utils/supabase");
+const { addTweet } = require("./utils/twitter");
 require("dotenv").config();
 
 const url = "https://apps.apple.com/us/app/coinbase-buy-bitcoin-ether/id886427730";
@@ -23,7 +24,10 @@ const testPuppeteer = async (res, user) => {
     const textSelector = await page.waitForSelector(`[href="https://apps.apple.com/us/charts/iphone/finance-apps/6015"]`);
     const textValue = await textSelector.evaluate((el) => el.textContent);
 
-    addToDB(getRank(textValue));
+    const rank = getRank(textValue);
+
+    addTweet(rank);
+    addToDB(rank);
   } catch (e) {
     console.error(e);
   } finally {
