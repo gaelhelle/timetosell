@@ -5,8 +5,11 @@ const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function addToDB(rank) {
-  const { data, error } = await supabase.from("values").insert({ rank: rank });
+async function addToDB({ globalRank, financeRank }) {
+  const { data, error } = await supabase.from("values").insert({
+    globalRank: globalRank,
+    rank: financeRank,
+  });
 
   if (error) {
     console.error(error);

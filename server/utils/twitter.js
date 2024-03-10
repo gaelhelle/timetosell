@@ -10,20 +10,24 @@ const client = new TwitterApi({
 
 const rwClient = client.readWrite;
 
-async function addTweet(rank) {
-  if (!rank) {
+async function addTweet({ globalRank, financeRank }) {
+  if (!globalRank || !financeRank) {
     console.error("Please provide a rank for the tweet");
     return;
   }
 
   let advice = `It's a great day to buy.`;
 
-  if (rank == "1") {
-    advice = `It's a great day to sell.`;
+  if (financeRank == "1") {
+    advice = `Be careful now, high volatility expected. BTD.`;
   }
 
   try {
-    await rwClient.v2.tweet(`As of today, Coinbase App is ranking #${rank}.\n${advice}`);
+    if (globalRank == "1") {
+      await rwClient.v2.tweet(`We did it guys. SELL THE F** OUT NOOOOOW. See you in 3 years.`);
+    } else {
+      await rwClient.v2.tweet(`As of today, Coinbase $COIN App is ranking:\nFinance: #${financeRank}\nAll Apps: #${globalRank}\n\n${advice}`);
+    }
   } catch (err) {
     console.error(err);
   }

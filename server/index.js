@@ -1,40 +1,32 @@
-const puppeteer = require("puppeteer");
-const { getRank } = require("./utils/utils");
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
+
 const { addToDB } = require("./utils/supabase");
 const { addTweet } = require("./utils/twitter");
+
 require("dotenv").config();
 
-const url = "https://apps.apple.com/us/app/coinbase-buy-bitcoin-ether/id886427730";
+const url = "https://app.sensortower.com/api/ios/category/category_history?app_ids%5B%5D=886427730&categories%5B%5D=6015&categories%5B%5D=0&categories%5B%5D=36&chart_type_ids%5B%5D=topfreeipadapplications&chart_type_ids%5B%5D=topfreeapplications&chart_type_ids%5B%5D=toppaidapplications&countries%5B%5D=US";
 
-const testPuppeteer = async (res, user) => {
-  let logStatement = "";
-
-  const browser = await puppeteer.launch({
-    args: ["--disable-setuid-sandbox", "--no-sandbox", "--single-process", "--no-zygote"],
-    executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
-  });
+const handleFetchRank = async (res, user) => {
   try {
-    const page = await browser.newPage();
+    const response = await fetch(url);
+    const data = await response.json();
 
-    await page.goto(url);
+    const globalRank = data["886427730"]["US"]["36"].topfreeapplications.todays_rank;
+    const financeRank = data["886427730"]["US"]["6015"].topfreeapplications.todays_rank;
 
-    await page.setViewport({ width: 1080, height: 1024 });
-
-    // Locate the full title with a unique string
-    const textSelector = await page.waitForSelector(`[href="https://apps.apple.com/us/charts/iphone/finance-apps/6015"]`);
-    const textValue = await textSelector.evaluate((el) => el.textContent);
-
-    const rank = getRank(textValue);
-
-    addTweet(rank);
-    addToDB(rank);
+    if (globalRank && financeRank) {
+      addToDB({ globalRank, financeRank });
+      addTweet({ globalRank, financeRank });
+    } else {
+      console.log("Error getting the ranks");
+    }
   } catch (e) {
     console.error(e);
   } finally {
-    await browser.close();
   }
 };
 
-testPuppeteer();
+handleFetchRank();
 
-module.exports = { testPuppeteer };
+module.exports = { handleFetchRank };
