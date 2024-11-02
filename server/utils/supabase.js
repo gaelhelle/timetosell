@@ -16,7 +16,7 @@ async function addToDB({ table, globalRank, financeRank }) {
     return;
   }
 
-  console.log(`Added to DB: ${table} !`);
+  console.log(`Added to DB: ${table} (${globalRank} - ${financeRank})!`);
 }
 
 module.exports = {
