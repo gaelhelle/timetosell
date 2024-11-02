@@ -5,8 +5,8 @@ const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function addToDB({ globalRank, financeRank }) {
-  const { data, error } = await supabase.from("values").insert({
+async function addToDB({ table, globalRank, financeRank }) {
+  const { data, error } = await supabase.from(table).insert({
     globalRank: globalRank,
     rank: financeRank,
   });
@@ -16,7 +16,7 @@ async function addToDB({ globalRank, financeRank }) {
     return;
   }
 
-  console.log("Added to DB!");
+  console.log(`Added to DB: ${table} !`);
 }
 
 module.exports = {
