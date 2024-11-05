@@ -29,6 +29,21 @@ async function getAppRankingLatest() {
   }
 }
 
+async function getAppRankingHistory(table) {
+  try {
+    let { data, error } = await supabase.from(table).select().order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    return data;
+  } catch (error) {
+    console.error("An unexpected error occurred:", error);
+  }
+}
+
 async function getRankValues() {
   let { data, error } = await supabase.from("values").select();
 
@@ -56,4 +71,4 @@ async function saveTwitterHandle(handle, ranks) {
   return data;
 }
 
-export { getRankValues, saveTwitterHandle, getAppRankingLatest };
+export { getRankValues, saveTwitterHandle, getAppRankingLatest, getAppRankingHistory };
