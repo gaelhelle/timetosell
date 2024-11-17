@@ -10,6 +10,8 @@ const apps = {
   robinhood_ios: { id: "938003185", country: "US", table_name: "robinhood_ios" },
   shakepay_ios: { id: "1244290088", country: "CA", table_name: "shakepay_ios" },
   bithumb_ios: { id: "1299421592", country: "KR", table_name: "bithumb_ios" },
+  phantom_ios: { id: "1598432977", country: "US", table_name: "phantom_ios" },
+  metamask_ios: { id: "1438144202", country: "US", table_name: "metamask_ios" },
 };
 
 const handleFetchRank = async (res, user) => {
